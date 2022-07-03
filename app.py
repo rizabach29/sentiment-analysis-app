@@ -43,17 +43,29 @@ def analyze_tweet():
 
 @app.route('/count-sentiment', methods=['POST']) #request body array of string/int sentiment analysis
 def count_percentage():
-    record = json.loads(request.data)
+    records = json.loads(request.data)
 
-    if not(isinstance(record, list)):
+    if not(isinstance(records, list)):
         return {'message': 'Request body must be in array formed !'}, 400
-    if len(record) <= 0:
+    if len(records) <= 0:
         return {'message': 'Request body array must not be empty !'}, 400
 
+    negativeArr = []
+    positiveArr = []
+    netralArr = []
+    for idx, val in enumerate(records):
+        if 'sentiment' in val:
+            if (val['sentiment'] == 'Negative') or (val['sentiment'] == 'negative'):
+                negativeArr.append(val['sentiment'])
+            elif (val['sentiment'] == 'Positive') or (val['sentiment'] == 'positive'):
+                positiveArr.append(val['sentiment'])
+            elif (val['sentiment'] == 'Netral') or (val['sentiment'] == 'netral'):
+                netralArr.append(val['sentiment'])
+
     percentage = [
-        {'Negative': 140},
-        {'Netral': 220},
-        {'Positive': 310}
+        {'Negative': len(negativeArr)},
+        {'Netral': len(netralArr)},
+        {'Positive': len(positiveArr)}
     ]
     responses = {
         "data": percentage
