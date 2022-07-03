@@ -13,9 +13,9 @@ def crawling_data_ecommerce(ecommerce):
 
     # crawling data by ecommerce
     crawled_data = [
-        {'tweetId': '1', 'username': '@User1', 'tweet': 'Ini tweet hasil crawling dari @User1 '+ecommerce},
-        {'tweetId': '2', 'username': '@User2', 'tweet': 'Ini tweet hasil crawling dari @User2 '+ecommerce},
-        {'tweetId': '3', 'username': '@User3', 'tweet': 'Ini tweet hasil crawling dari @User3 '+ecommerce}
+        {"date": "2022-05-27 T00:00:00", 'username': '@User1', 'tweet': 'Ini tweet hasil crawling dari @User1 '+ecommerce},
+        {"date": "2022-05-27 T00:00:00", 'username': '@User2', 'tweet': 'Ini tweet hasil crawling dari @User2 '+ecommerce},
+        {"date": "2022-05-27 T00:00:00", 'username': '@User3', 'tweet': 'Ini tweet hasil crawling dari @User3 '+ecommerce}
     ]
 
     return jsonify(crawled_data)
