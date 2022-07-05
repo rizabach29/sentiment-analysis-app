@@ -1,6 +1,8 @@
 import json
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_restful import reqparse, abort, Api, Resource
+
+from ansimeter_v2 import crawlingTweet
 
 app = Flask(__name__)
 api = Api(app)
@@ -11,14 +13,35 @@ def crawling_data_ecommerce(ecommerce):
     if ecommerce != "shopee" and ecommerce != "lazada" and ecommerce != "tokopedia" and ecommerce != "bukalapak" and ecommerce != "blibli":
         return {'message': 'ecommerce parameter invalid!'}, 400
 
-    # crawling data by ecommerce
-    crawled_data = [
-        {"date": "2022-05-27 T00:00:00", 'username': '@User1', 'tweet': 'Ini tweet hasil crawling dari @User1 '+ecommerce},
-        {"date": "2022-05-27 T00:00:00", 'username': '@User2', 'tweet': 'Ini tweet hasil crawling dari @User2 '+ecommerce},
-        {"date": "2022-05-27 T00:00:00", 'username': '@User3', 'tweet': 'Ini tweet hasil crawling dari @User3 '+ecommerce}
-    ]
+    shopeeArray = ['ShopeeID','shopee','shopeecare','syopi']
+    lazadaArray = ['lazada','LazadaCare','LazadaID']
+    tokopediaArray = ['tokopedia','tokopediacare','tokped']
+    bukalapakArray = ['BukaBantuan','bukalapak']
+    blibliArray = ['blibli','bliblicare','bliblidotcom']
 
-    return jsonify(crawled_data)
+    results = []
+    dataEcommerce = []
+    if ecommerce == "shopee":
+        dataEcommerce = shopeeArray
+    elif ecommerce == "lazada":
+        dataEcommerce = lazadaArray
+    elif ecommerce == "tokopedia":
+        dataEcommerce = tokopediaArray
+    elif ecommerce == "bukalapak":
+        dataEcommerce = bukalapakArray
+    elif ecommerce == "blibli":
+        dataEcommerce = blibliArray
+
+    for dat in dataEcommerce:
+        res = crawlingTweet(dat)
+        for val in res:
+            # if isinstance(val, bytes):
+            #     results.append(val)
+            #     continue
+            results.append(val)
+
+    # print("HASIL: ", results[0])
+    return json.dumps(results, indent=4, sort_keys=True, default=str)
 
 @app.route('/analyze-tweets', methods=['POST']) #request body array of object: string tweet, username, datetime
 def analyze_tweet():
