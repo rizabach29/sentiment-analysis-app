@@ -2,7 +2,7 @@ import json
 from flask import Flask, jsonify, request, Response
 from flask_restful import reqparse, abort, Api, Resource
 
-from ansimeter_v2 import crawlingTweet
+from ansimeter_v2 import crawlingTweet, preprocessing1, preprocessing2, postagging, scoring, label_sentiment
 
 app = Flask(__name__)
 api = Api(app)
@@ -47,20 +47,31 @@ def crawling_data_ecommerce(ecommerce):
 def analyze_tweet():
     # parser = reqparse.RequestParser()
     # args = parser.parse_args()
-    record = json.loads(request.data)
+    records = json.loads(request.data)
 
-    if not(isinstance(record, list)):
+    if not(isinstance(records, list)):
         return {'message': 'Request body must be in array formed !'}, 400
-    if len(record) <= 0:
+    if len(records) <= 0:
         return {'message': 'Request body array must not be empty !'}, 400
+    # print("TYPE: ", type(records[0])) #array of dict
 
-    sentimented = [
-        {'tweetId': '1', 'sentiment': 'Negative'},
-        {'tweetId': '2', 'sentiment': 'Netral'},
-        {'tweetId': '3', 'sentiment': 'Positive'}
-    ]
+    resultTemps = []
+    for record in records:
+        resTemp = preprocessing1(record['tweet'])
+        tokenizedTemp = preprocessing2(resTemp)
+        postaggedTemp = postagging(tokenizedTemp)
+        resultTemps.append(postaggedTemp)
+
+    scoredText = scoring(resultTemps)
+    labeledText = label_sentiment(scoredText)
+
+    # sentimented = [
+    #     {'tweetId': '1', 'sentiment': 'Negative'},
+    #     {'tweetId': '2', 'sentiment': 'Netral'},
+    #     {'tweetId': '3', 'sentiment': 'Positive'}
+    # ]
     responses = {
-        "data": sentimented
+        "data": labeledText
     }
     return jsonify(responses) #return array of object string hasil sentiment analysis
 
