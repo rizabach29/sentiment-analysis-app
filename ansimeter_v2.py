@@ -99,8 +99,7 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 
 # import matplotlib.pyplot as plt
-# import pandas as pd
-import numpy as np
+# import numpy as np
 
 stopwordFactory = StopWordRemoverFactory()
 stopword = stopwordFactory.create_stop_word_remover()
@@ -119,10 +118,6 @@ def casefolding(review):
     review = review.lower()
     return review
 
-# kalimat = '@shopee Ini gimAna udah menunggu 10 jam tp gAgAl,, yg lainnya pd cepet'
-# print('Kalimat : \n' + kalimat)
-# hasilCasefolding = casefolding(kalimat)
-# print('Hasil casefolding: \n' + hasilCasefolding)
 
 def filtering(text):
     text = " ".join(filter(lambda x:x[0]!='(', text.split()))
@@ -133,9 +128,6 @@ def filtering(text):
     text = text.strip()
     return text
 
-# print('Hasil Casefolding : \n' + hasilCasefolding)
-# hasilFiltering = filtering(hasilCasefolding)
-# print('Hasil Filtering: \n' + hasilFiltering)
 
 def normalization(review):
     kamus_slangword = eval(open("slangwords.txt").read()) # Membuka dictionary slangword
@@ -148,9 +140,6 @@ def normalization(review):
 
     return review
 
-# print('Hasil Filtering : \n' + hasilFiltering)
-# hasilNormalization = normalization(hasilFiltering)
-# print('Hasil Normalisasi: \n' + hasilNormalization)
 
 def translate(text):
   translator = Translator()
@@ -171,19 +160,6 @@ def removeStopwords(text):
 
   return text
 
-# removeStopwords("this is how it's been waiting for hours but failed others on not fast")
-
-# print('Hasil Normalisasi : \n' + hasilNormalization)
-# hasilTranslate = translate(hasilNormalization)
-# print('Hasil Translate: \n' + hasilTranslate)
-
-# print('Hasil Normalisasi : \n' + hasilTranslate)
-# hasilRemoveStopword = removeStopwords(hasilTranslate)
-# print('Hasil Hapus Stopword:')
-# print(hasilRemoveStopword)
-
-# x = removeStopwords('it is not Beautiful but scary')
-# print(x)
 
 def stemming(text):
 
@@ -203,10 +179,6 @@ def tokenizing(review):
     token = nltk.word_tokenize(review)
     return token
 
-# print('Hasil Stemming : \n' + hasilStemming)
-# hasilTokenizing = tokenizing(hasilStemming)
-# print('Hasil Tokenizing:')
-# print(hasilTokenizing)
 
 def preprocessing1(text):
 
@@ -224,24 +196,6 @@ def preprocessing2(teks):
     tokens = tokenizing(teks)
     return tokens
 
-# keywords = []
-# tweets = []
-
-# for i, row in dataset.iterrows():
-#     teks = preprocessing1(row['Tweets'])
-#     tweets.append(teks)
-#
-# tweets = np.array(tweets)
-# uniqueTweets = np.unique(tweets)
-#
-# notEmpty = [i for i in uniqueTweets if i]
-#
-# keywords=[]
-# for tweet in notEmpty:
-#     keyword = preprocessing2(tweet)
-#     keywords.append(keyword)
-#
-# keywords
 
 """# POSTAGGING"""
 
