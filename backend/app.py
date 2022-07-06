@@ -65,13 +65,12 @@ def analyze_tweet():
     scoredText = scoring(resultTemps)
     labeledText = label_sentiment(scoredText)
 
-    # sentimented = [
-    #     {'tweetId': '1', 'sentiment': 'Negative'},
-    #     {'tweetId': '2', 'sentiment': 'Netral'},
-    #     {'tweetId': '3', 'sentiment': 'Positive'}
-    # ]
+    results = []
+    for idx, record in enumerate(records):
+        results.append({'date': record['date'], 'username': record['username'], 'tweet': record['tweet'], 'sentiment': labeledText[idx]})
+
     responses = {
-        "data": labeledText
+        "data": results
     }
     return jsonify(responses) #return array of object string hasil sentiment analysis
 
