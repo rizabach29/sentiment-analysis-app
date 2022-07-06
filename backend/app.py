@@ -1,11 +1,12 @@
 import json
 from flask import Flask, jsonify, request, Response
 from flask_restful import reqparse, abort, Api, Resource
-
+from flask_cors import CORS
 from ansimeter_v2 import crawlingTweet, preprocessing1, preprocessing2, postagging, scoring, label_sentiment
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 @app.route('/crawling-data/<string:ecommerce>', methods=['GET'])
 def crawling_data_ecommerce(ecommerce):
