@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "7e3db7d8-717e-4bb0-aaa2-603d267c294f",
+		"name": "Sentiment Analysis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21601939"
+	},
+	"item": [
+		{
+			"name": "Count Sentiment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\"sentiment\": \"Negative\"},\r\n    {\"sentiment\": \"Positive\"},\r\n    {\"sentiment\": \"Netral\"},\r\n    {\"sentiment\": \"Positive\"},\r\n    {\"sentiment\": \"Negative\"},\r\n    {\"sentiment\": \"Positive\"}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:105/count-sentiment",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "105",
+					"path": [
+						"count-sentiment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Analyze Tweets",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"date\": \"2022-07-05 10:30:25+00:00\",\r\n        \"id\": 1544267450069368833,\r\n        \"tweet\": \"b'@BukaBantuan pesanan 223292304153 dari pagi request kurir ga dateng2 sampe kami pulang, coba di drop di agen lion parcel ga bisa, krn wajib di pickup. Mohon dibantu'\",\r\n        \"username\": \"FJB Android\"\r\n    },\r\n    {\r\n        \"date\": \"2022-07-05 10:10:59+00:00\",\r\n        \"id\": 1544262559263444992,\r\n        \"tweet\": \"b'@BukaBantuan Pls cdm ya,,'\",\r\n        \"username\": \"gembrot\"\r\n    },\r\n    {\r\n        \"date\": \"2022-07-05 08:38:34+00:00\",\r\n        \"id\": 1544239299256000513,\r\n        \"tweet\": \"b'@BukaBantuan https://t.co/Kn7m4Se5fV'\",\r\n        \"username\": \"ricky ricardo\"\r\n    },\r\n    {\r\n        \"date\": \"2022-07-05 05:56:56+00:00\",\r\n        \"id\": 1544198625789898752,\r\n        \"tweet\": \"b'@BukaBantuan cek dm kak'\",\r\n        \"username\": \"HanBurhan\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:105/analyze-tweets",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "105",
+					"path": [
+						"analyze-tweets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crawl Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:105/crawling-data/:ecommerce",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "105",
+					"path": [
+						"crawling-data",
+						":ecommerce"
+					],
+					"variable": [
+						{
+							"key": "ecommerce",
+							"value": "bukalapak"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
