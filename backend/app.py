@@ -89,7 +89,6 @@ def count_percentage():
     netralArr = []
     for idx, val in enumerate(records):
         if 'sentiment' in val:
-            print(val['sentiment'])
             if (val['sentiment'] == 'Negatif') or (val['sentiment'] == 'negatif'):
                 negativeArr.append(val['sentiment'])
             elif (val['sentiment'] == 'Positif') or (val['sentiment'] == 'positif'):
