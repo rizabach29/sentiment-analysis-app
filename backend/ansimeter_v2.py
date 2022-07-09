@@ -142,9 +142,9 @@ def normalization(review):
 
 
 def translate(text):
+  print(text)
   translator = Translator()
   translation = translator.translate(text, src='id', dest='en')
-
   return translation.text
 
 kata_depan_list = ['no', 'not', 'nix', 'never', 'nay']

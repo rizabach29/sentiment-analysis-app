@@ -39,6 +39,7 @@ def crawling_data_ecommerce(ecommerce):
             # if isinstance(val, bytes):
             #     results.append(val)
             #     continue
+            val['tweet'] = val['tweet'].decode('utf-8')
             results.append(val)
 
     # print("HASIL: ", results[0])
@@ -49,6 +50,7 @@ def analyze_tweet():
     # parser = reqparse.RequestParser()
     # args = parser.parse_args()
     records = json.loads(request.data)
+    print(json.dumps(records, indent=4))
 
     if not(isinstance(records, list)):
         return {'message': 'Request body must be in array formed !'}, 400
